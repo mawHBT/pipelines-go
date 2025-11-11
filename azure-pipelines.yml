@@ -21,12 +21,14 @@ steps:
     version: '1.13.5'
 - task: Go@0
   inputs:
+    # go get to download Go packages and their dependencies
     command: 'get'
     arguments: '-d'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
   # BUILD
 - task: Go@0
   inputs:
+    # go build to generate the content that is published with PublishBuildArtifacts@1 task.
     command: 'build'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
 - task: CopyFiles@2
@@ -63,6 +65,7 @@ steps:
   # TEST
 - task: Go@0
   inputs:
+    # test Go module and subdirectories
     command: 'test'
     arguments: '-v'
     workingDirectory: '$(modulePath)'
